@@ -55,7 +55,12 @@ async function main(args) {
 async function generateMapPreviews(files, options = {}) {
   const gfx = loadGraphics(options.pathGfx)
   for (const file of files) {
-    await generateMapPreview(file, gfx, options)
+    try {
+      await generateMapPreview(file, gfx, options)
+    } catch (err) {
+      console.error(`bwpreview: Error processing file "${file}"`)
+      console.error(err)
+    }
   }
 }
 
